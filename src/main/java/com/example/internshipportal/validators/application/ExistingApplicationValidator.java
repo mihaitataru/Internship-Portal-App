@@ -18,8 +18,8 @@ public class ExistingApplicationValidator implements Validator<JobApplication> {
      */
     @Override
     public void validate(JobApplication application) {
-        var jobApp = jobApplicationRepository.findByJobId(application.getJobId()).orElse(null);
-        if(jobApp != null && jobApp.getUsername().equals(application.getUsername())) {
+        var jobApp = jobApplicationRepository.findByJobIdAndUsername(application.getJobId(), application.getUsername()).orElse(null);
+        if(jobApp != null) {
             throw new IllegalArgumentException("Application already exist");
         }
     }

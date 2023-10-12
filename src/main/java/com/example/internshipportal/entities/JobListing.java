@@ -16,6 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class JobListing {
     @Id
+    @GeneratedValue
     private Long id;
 
     private String title;
@@ -28,5 +29,5 @@ public class JobListing {
     private User author;
 
     @OneToMany
-    private List<Application> applications;
+    private List<JobApplication> applications;
 }

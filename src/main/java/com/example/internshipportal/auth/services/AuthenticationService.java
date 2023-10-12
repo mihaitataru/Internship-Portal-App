@@ -2,7 +2,7 @@ package com.example.internshipportal.auth.services;
 
 import com.example.internshipportal.auth.AuthenticationResponse;
 import com.example.internshipportal.auth.RegisterRequest;
-import com.example.internshipportal.auth.controllers.AuthenticationRequest;
+import com.example.internshipportal.auth.AuthenticationRequest;
 import com.example.internshipportal.configs.JwtService;
 import com.example.internshipportal.entities.User;
 import com.example.internshipportal.repositories.UserRepository;

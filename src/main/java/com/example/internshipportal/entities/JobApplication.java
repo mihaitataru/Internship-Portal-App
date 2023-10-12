@@ -1,8 +1,7 @@
 package com.example.internshipportal.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,15 +9,21 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "Applications")
+@Table(name = "Applications", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"job", "applicant"})})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Application {
+public class JobApplication {
     @Id
+    @GeneratedValue
     private Long id;
 
-    private String jobName;
+    @Column(name = "job")
+    private Long jobId;
+
+    @Column(name = "applicant")
+    private String username;
 
     private String firstName;
 

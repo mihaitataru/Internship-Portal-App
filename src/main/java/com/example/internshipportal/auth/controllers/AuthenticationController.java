@@ -1,5 +1,6 @@
 package com.example.internshipportal.auth.controllers;
 
+import com.example.internshipportal.auth.AuthenticationRequest;
 import com.example.internshipportal.auth.AuthenticationResponse;
 import com.example.internshipportal.auth.RegisterRequest;
 import com.example.internshipportal.auth.services.AuthenticationService;

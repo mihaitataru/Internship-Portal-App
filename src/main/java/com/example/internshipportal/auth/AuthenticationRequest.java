@@ -1,4 +1,4 @@
-package com.example.internshipportal.auth.controllers;
+package com.example.internshipportal.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

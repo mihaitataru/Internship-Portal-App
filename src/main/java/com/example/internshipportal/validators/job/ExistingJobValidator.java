@@ -19,7 +19,7 @@ public class ExistingJobValidator implements Validator<JobListingDTO> {
      */
     @Override
     public void validate(JobListingDTO t) {
-        var existingJob = jobListingRepository.findByTitle(t.getTitle()).orElse(null);
+        var existingJob = jobListingRepository.findByTitleAndCompanyName(t.getTitle(), t.getCompanyName()).orElse(null);
         if(existingJob != null && existingJob.getCompanyName().equals(t.getCompanyName())) {
             throw new IllegalArgumentException("Job already exists");
         }

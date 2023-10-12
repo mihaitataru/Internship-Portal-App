@@ -10,5 +10,7 @@ import java.util.Optional;
 public interface JobListingRepository extends JpaRepository<JobListing, Long> {
     public Optional<JobListing> findByTitle(String title);
 
+    public Optional<JobListing> findByTitleAndCompanyName(String title, String companyName);
+
     public List<JobListing> findAllByAuthor(User user);
 }

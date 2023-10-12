@@ -10,7 +10,8 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "Jobs")
+@Table(name = "Jobs", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"title", "company"})})
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -21,13 +22,14 @@ public class JobListing {
 
     private String title;
 
+    @Column(name = "company")
     private String companyName;
 
     private String description;
 
-    @OneToOne
+    @ManyToOne
     private User author;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE)
     private List<JobApplication> applications;
 }

@@ -29,7 +29,7 @@ public class JobApplication {
 
     private String lastName;
 
-    private long phoneNumber;
+    private String phoneNumber;
 
     private String email;
 

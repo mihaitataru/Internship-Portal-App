@@ -3,6 +3,7 @@ package com.example.internshipportal.controllers;
 import com.example.internshipportal.dto.JobListingDTO;
 import com.example.internshipportal.entities.JobApplication;
 import com.example.internshipportal.entities.JobListing;
+import com.example.internshipportal.entities.User;
 import com.example.internshipportal.services.JobService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,26 @@ public class JobController {
         }
     }
 
+    @GetMapping(path = "/{username}")
+    public ResponseEntity<List<JobListing>> getJobsForEmployer(@PathVariable String username) {
+        try{
+            List<JobListing> jobs = jobListingService.getJobListings(username);
+            return ResponseEntity.ok(jobs);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @GetMapping(path = "/applicants/{variable}")
+    public ResponseEntity<List<User>> getApplicantsForJobs(@PathVariable String variable) {
+        try{
+            List<User> users = jobListingService.getApplicantsForJob(variable);
+            return ResponseEntity.ok(users);
+        } catch (Exception e){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+    }
+
     @PostMapping(path = "/add")
     @PreAuthorize("hasRole('ROLE_EMPLOYER')")
     public ResponseEntity<String> addJob(@RequestBody JobListingDTO jobListing) {
@@ -45,13 +66,28 @@ public class JobController {
         }
     }
 
+    @DeleteMapping(path = "/remove/{jobId}")
+    @PreAuthorize("hasRole('ROLE_EMPLOYER')")
+    public ResponseEntity<String> addJob(@PathVariable long jobId) {
+        try {
+            jobListingService.deleteJob(jobId);
+            return  ResponseEntity.ok("Job has been deleted");
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @PostMapping(path="/apply")
     @PreAuthorize("hasRole('ROLE_APPLICANT')")
     public ResponseEntity<String> addApplication(@RequestBody JobApplication application) {
         try {
             jobListingService.validateAndAddApplication(application);
             return new ResponseEntity<>("Application created successfully", HttpStatus.OK);
-        } catch (Exception ex){
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        } catch (Exception ex) {
             return new ResponseEntity<>(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }

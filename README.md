@@ -47,6 +47,9 @@ To display a list of all applicants for a specific job or employer the "/api/v1/
 
 ![image](https://github.com/mihaitataru/Internship-Portal-App/assets/96471978/b6427527-d6c0-4f86-9d4d-26ad46903c5c)
 
+![image](https://github.com/mihaitataru/Internship-Portal-App/assets/96471978/b7e43bd5-b6ad-4102-aa52-9a75f7b4544f)
+
+
 
 
 
